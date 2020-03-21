@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import Players from './Players'
 
 
 function App() {
@@ -14,14 +15,20 @@ function App() {
       .then(res => setPlayers(res.data))
       .catch(err => console.log(err));
   }, []);
-    console.log('players', players)
+    
+  const newPlayersArray = players.map(x=>x = {...x, ...{clicked: false}})
+
+  console.log('players', newPlayersArray)
+
+  const toggleClick = event => {
+    event.preventDefault()
+    console.log('clicked', event)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <ul>
-          {players.map(x=><li key={x.id}>{x.name}</li>)}
-        </ul>
-        
+        <Players players={newPlayersArray}/>
       </header>
     </div>
   );
