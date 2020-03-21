@@ -1,23 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+
 
 function App() {
+
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:5000/api/players"
+      )
+      .then(res => setPlayers(res.data))
+      .catch(err => console.log(err));
+  }, []);
+    console.log('players', players)
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+          {players.map(x=><li key={x.id}>{x.name}</li>)}
+        </ul>
+        
       </header>
     </div>
   );
