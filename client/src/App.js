@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import Players from './Players'
+import Navbar from './Navbar'
 
 
 function App() {
@@ -20,14 +21,10 @@ function App() {
 
   console.log('players', newPlayersArray)
 
-  const toggleClick = event => {
-    event.preventDefault()
-    console.log('clicked', event)
-  }
-
   return (
     <div className="App">
-      <header className="App-header">
+      <header >
+        <Navbar />
         <Players players={newPlayersArray}/>
       </header>
     </div>
